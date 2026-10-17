@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Verifique a compatibilidade do seu navegador e dos seus óculos com as experiências do Portal 360º VR.">
+  <title>Diagnóstico VR · Portal 360º VR</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#edf6ff;background:#081423;color-scheme:dark;--cyan:#52cee9;--muted:#a7bbd0;--border:#263a50;--green:#83dfb5;--amber:#f2cb85;--red:#ffb6ac}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 95% 0,rgba(55,177,218,.1),transparent 42%),#081423;min-height:100vh;line-height:1.6}a{color:inherit}button,input{font:inherit}button,a{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--cyan);outline-offset:5px}.wrap{max-width:1050px;padding:0 28px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:26px 0;border-bottom:1px solid var(--border)}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:700;letter-spacing:-.02em}.mark{display:grid;place-items:center;border:1px solid #42748d;border-radius:13px;background:#0d2a40;width:44px;height:44px;color:var(--cyan);font-size:13px;font-weight:800}.back{font-size:14px;text-decoration:none;color:#c9dfec}.back:hover{color:var(--cyan)}main{padding:50px 0 40px}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin:0 0 12px}h1{font-size:clamp(30px,5vw,44px);line-height:1.16;letter-spacing:-.04em;margin:0 0 18px}h2{font-size:19px;line-height:1.4;letter-spacing:-.02em;margin:0 0 10px}.lead{color:var(--muted);max-width:680px;margin:0 0 32px}.summary{border:1px solid var(--border);background:linear-gradient(110deg,#102a40,#101f30);border-radius:18px;padding:22px 24px;display:flex;gap:15px;align-items:flex-start;margin-bottom:24px}.summary-icon{width:38px;height:38px;border:1px solid #46617a;border-radius:50%;display:grid;place-items:center;color:var(--cyan);flex:none;font-size:20px}.summary h2{margin:0 0 3px;font-size:17px}.summary p{color:var(--muted);margin:0;font-size:14px}.summary[data-tone="good"] .summary-icon{color:var(--green);border-color:#38775f}.summary[data-tone="warn"] .summary-icon{color:var(--amber);border-color:#80683d}.checks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:0 0 30px}.check{background:#0f1d2e;border:1px solid var(--border);border-radius:14px;padding:18px 20px;min-width:0}.check dt{font-size:12px;color:var(--muted);margin-bottom:7px}.check dd{margin:0;font-weight:650;font-size:15px;overflow-wrap:anywhere}.check dd[data-state="good"]{color:var(--green)}.check dd[data-state="warn"]{color:var(--amber)}.small{font-size:13px;color:var(--muted)}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}.panel{border:1px solid var(--border);border-radius:18px;padding:24px;background:#0d1b2c;min-width:0}.panel p{color:var(--muted);font-size:14px;margin:0 0 18px}.hands{display:flex;align-items:flex-start;gap:10px;color:#d7e5f3;font-size:14px;margin:22px 0 16px}.hands input{accent-color:var(--cyan);width:18px;height:18px;margin:3px 0 0;flex:none}.button{border:1px solid #36516a;background:#142d42;color:#edf6ff;border-radius:10px;padding:12px 18px;font-weight:650;font-size:14px;cursor:pointer;min-height:46px}.button.primary{background:var(--cyan);color:#062133;border-color:var(--cyan)}.button:hover{filter:brightness(1.08)}.button:disabled{opacity:.55;cursor:wait}.actions{display:flex;gap:10px;flex-wrap:wrap}.notice{min-height:24px;font-size:13px!important;margin:14px 0 0!important;color:#cadce9!important}.counts{display:flex;gap:20px;padding-top:18px;margin-top:18px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);flex-wrap:wrap}.counts strong{font-size:20px;display:block;color:#eaf5ff;font-weight:650}.tips{padding-left:19px;font-size:14px;color:var(--muted);margin:12px 0 0}.tips li{padding:0 0 10px 3px}.tips strong{color:#dbeafa;font-weight:600}details{margin-top:24px;border:1px solid var(--border);border-radius:14px;background:#0b1726}summary{cursor:pointer;padding:17px 20px;font-size:14px;font-weight:600}pre{margin:0;padding:0 20px 20px;font:12px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:#bed2e4;max-height:420px;overflow:auto}.foot{border-top:1px solid var(--border);padding:22px 0 32px;font-size:12px;color:#849db6;display:flex;justify-content:space-between;gap:20px}.foot a{text-decoration:none;color:#bdd1e2}.privacy{margin:20px 0 0;color:#8ca5bf;font-size:12px}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:720px){.wrap{padding:0 18px}.top{padding:18px 0;gap:10px}.brand{font-size:14px}.back{font-size:12px}main{padding-top:32px}.checks{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr}.panel{padding:20px}.summary{padding:19px}.foot{flex-direction:column;gap:6px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="./?catalog=1" aria-label="Portal 360º VR, voltar ao catálogo"><span class="mark" aria-hidden="true">360º</span><span>Portal 360º VR</span></a>
+      <a class="back" href="./?catalog=1">← Voltar ao catálogo</a>
+    </header>
+    <main>
+      <p class="eyebrow">Central de ajuda · Compatibilidade</p>
+      <h1>Prepare-se para explorar.</h1>
+      <p class="lead">Confira se o navegador está pronto para entrar em realidade virtual. O teste de imersão só começa quando você escolhe iniciá-lo.</p>
+      <section class="summary" id="summary" aria-live="polite">
+        <span class="summary-icon" id="summaryIcon" aria-hidden="true">i</span>
+        <div><h2 id="summaryTitle">Verificando o ambiente…</h2><p id="summaryText">Consultando os recursos informados pelo navegador.</p></div>
+      </section>
+      <dl class="checks">
+        <div class="check"><dt>Conexão HTTPS</dt><dd id="https">Verificando…</dd></div>
+        <div class="check"><dt>Contexto seguro</dt><dd id="secure">Verificando…</dd></div>
+        <div class="check"><dt>API WebXR</dt><dd id="xr">Verificando…</dd></div>
+        <div class="check"><dt>Realidade virtual · immersive-vr</dt><dd id="vr">Verificando…</dd></div>
+        <div class="check"><dt>Realidade aumentada · immersive-ar</dt><dd id="ar">Verificando…</dd></div>
+        <div class="check"><dt>Renderização WebGL 2</dt><dd id="gl">Verificando…</dd></div>
+      </dl>
+      <div class="grid">
+        <section class="panel" aria-labelledby="testTitle">
+          <h2 id="testTitle">Faça um teste nos óculos</h2>
+          <p>Uma sessão VR curta verifica a abertura e a camada de imagem. A tela ficará azul-escura por cerca de 3 segundos e a sessão será encerrada automaticamente.</p>
+          <label class="hands"><input type="checkbox" id="hands"><span>Solicitar rastreamento de mãos <span class="small">(opcional)</span></span></label>
+          <div class="actions"><button class="button primary" id="test" type="button">Testar sessão VR</button><button class="button" id="copy" type="button">Copiar diagnóstico</button></div>
+          <p id="notice" class="notice" role="status" aria-live="polite">Nenhuma sessão iniciada.</p>
+          <div class="counts" aria-label="Contadores desta visita"><span><strong id="attempts">0</strong>tentativas</span><span><strong id="opened">0</strong>sessões abertas</span><span><strong id="closed">0</strong>sessões encerradas</span></div>
+        </section>
+        <aside class="panel" aria-labelledby="helpTitle">
+          <h2 id="helpTitle">Como interpretar</h2>
+          <ul class="tips">
+            <li><strong>VR disponível:</strong> o navegador informa suporte. A abertura ainda depende da permissão e do dispositivo.</li>
+            <li><strong>VR indisponível:</strong> abra o Portal no navegador dos óculos. As experiências 3D podem continuar acessíveis na tela.</li>
+            <li><strong>Mãos:</strong> solicitar o recurso não confirma que haverá rastreamento. O relatório separa o pedido das fontes de mãos observadas durante o teste.</li>
+            <li><strong>AR disponível:</strong> não confirma passthrough, realidade mista ou suporte desses recursos em cada aplicação.</li>
+          </ul>
+        </aside>
+      </div>
+      <details open><summary>Relatório técnico</summary><pre id="out" tabindex="0" aria-label="Relatório técnico de compatibilidade">Verificando…</pre></details>
+      <p class="privacy">Este diagnóstico é processado neste navegador. Nenhum relatório é enviado automaticamente. Ao copiar ou baixar, você decide com quem compartilhar.</p>
+      <noscript><p>Ative o JavaScript para consultar a compatibilidade e executar o teste de VR.</p></noscript>
+    </main>
+    <footer class="foot"><span>Portal 360º VR · Aprender é explorar.</span><a href="./?catalog=1">Continuar no catálogo →</a></footer>
+  </div>
+  <script>
+  (() => {
+    'use strict';
+    const $ = id => document.getElementById(id);
+    const state = { busy: false, disposed: false, session: null, context: null, attempts: 0, opened: 0, closed: 0, vr: null, gl2: false };
+    const lines = [];
+    const ended = new WeakSet();
+    const closing = new WeakMap();
+    let stopObservation = null;
+    const errorText = error => (error && error.name ? error.name + ': ' : '') + (error && error.message ? error.message : String(error));
+    function log(label, value) {
+      lines.push(label + ': ' + value);
+      if (lines.length > 240) lines.splice(0, lines.length - 240);
+      $('out').textContent = lines.join('\n');
+    }
+    function field(id, value, tone) { $(id).textContent = value; $(id).dataset.state = tone || ''; }
+    function counters() { for (const key of ['attempts', 'opened', 'closed']) $(key).textContent = String(state[key]); }
+    function banner(title, description, tone) {
+      $('summaryTitle').textContent = title;
+      $('summaryText').textContent = description;
+      $('summary').dataset.tone = tone;
+      $('summaryIcon').textContent = tone === 'good' ? '✓' : 'i';
+    }
+    function refreshSummary() {
+      if (!window.isSecureContext) return banner('Abra o Portal por uma conexão segura', 'A entrada em VR exige um contexto seguro. Use o endereço HTTPS do Portal nos óculos.', 'warn');
+      if (!navigator.xr) return banner('A imersão VR não está disponível neste navegador', 'Você ainda pode acessar o catálogo e explorar os modos 3D compatíveis com o seu dispositivo.', 'warn');
+      if (state.vr === true) return banner('O navegador informa suporte a VR', 'Faça o teste nos óculos para verificar a abertura da sessão. A qualidade das aplicações precisa ser avaliada dentro de cada experiência.', 'good');
+      if (state.vr === false) return banner('VR não está disponível neste ambiente', 'Verifique o dispositivo conectado ou abra esta página diretamente no navegador dos óculos.', 'warn');
+      banner('Não foi possível confirmar a compatibilidade VR', 'Confira os detalhes do relatório. Se houver um headset conectado, você pode tentar abrir a sessão pelo botão abaixo.', 'warn');
+    }
+    function releaseGL(gl) {
+      if (!gl) return;
+      try { const ext = gl.getExtension('WEBGL_lose_context'); if (ext) ext.loseContext(); } catch (_) { /* A context may already have been lost. */ }
+      if (state.context === gl) state.context = null;
+    }
+    function gpuInfo(gl) {
+      log('Versão WebGL', gl.getParameter(gl.VERSION));
+      log('Renderizador WebGL', gl.getParameter(gl.RENDERER));
+      const extension = gl.getExtension('WEBGL_debug_renderer_info');
+      log('GPU informada', extension ? gl.getParameter(extension.UNMASKED_RENDERER_WEBGL) : 'Detalhes não expostos pelo navegador');
+    }
+    function probeGraphics() {
+      // One canvas/context probe per page load; release it even if querying the GPU fails.
+      let gl = null;
+      try {
+        const canvas = document.createElement('canvas');
+        gl = canvas.getContext('webgl2', { powerPreference: 'high-performance' });
+        state.gl2 = !!gl;
+        field('gl', gl ? 'Disponível' : 'Indisponível', gl ? 'good' : 'warn');
+        log('WebGL 2', gl ? 'Disponível' : 'Indisponível');
+        if (gl) gpuInfo(gl);
+      } catch (error) { field('gl', 'Falha na consulta', 'warn'); log('Consulta WebGL 2', errorText(error)); }
+      finally { releaseGL(gl); }
+    }
+    async function checkMode(mode, id) {
+      if (!navigator.xr || typeof navigator.xr.isSessionSupported !== 'function') {
+        field(id, 'Não informado', 'warn'); log(mode, 'Consulta indisponível'); return;
+      }
+      try {
+        const supported = await navigator.xr.isSessionSupported(mode);
+        if (state.disposed) return;
+        field(id, supported ? 'Disponível' : 'Indisponível', supported ? 'good' : 'warn');
+        log(mode, supported ? 'Suporte informado pelo navegador' : 'Sem suporte neste ambiente');
+        if (mode === 'immersive-vr') state.vr = supported;
+      } catch (error) { field(id, 'Não confirmado', 'warn'); log('Consulta ' + mode, errorText(error)); }
+    }
+    function registerEnd(session) {
+      if (ended.has(session)) return;
+      ended.add(session); state.closed++; counters(); log('Sessão VR', 'Encerramento confirmado');
+      if (stopObservation) stopObservation();
+      if (state.session === session) state.session = null;
+    }
+    function closeSession(session) {
+      if (!session || ended.has(session)) return Promise.resolve();
+      if (closing.has(session)) return closing.get(session);
+      const promise = (async () => {
+        try { await session.end(); registerEnd(session); }
+        catch (error) { if (!ended.has(session)) log('Encerramento da sessão', errorText(error)); }
+      })();
+      closing.set(session, promise);
+      return promise;
+    }
+    function observeSession(session, gl, layer) {
+      return new Promise(resolve => {
+        const handsSeen = new Set();
+        let maxInputs = 0, frames = 0, frameId = 0, done = false, failed = false;
+        function collect() {
+          const inputs = Array.from(session.inputSources || []);
+          maxInputs = Math.max(maxInputs, inputs.length);
+          for (const source of inputs) if (source.hand) handsSeen.add(source.handedness === 'left' ? 'esquerda' : source.handedness === 'right' ? 'direita' : 'sem lado informado');
+        }
+        function finish() {
+          if (done) return; done = true;
+          clearTimeout(timer);
+          try { if (frameId) session.cancelAnimationFrame(frameId); } catch (_) { /* Session ended. */ }
+          session.removeEventListener('inputsourceschange', collect);
+          if (stopObservation === finish) stopObservation = null;
+          resolve({ hands: Array.from(handsSeen), maxInputs, frames, failed });
+        }
+        function frame() {
+          if (done) return;
+          try {
+            collect();
+            gl.bindFramebuffer(gl.FRAMEBUFFER, layer.framebuffer);
+            gl.clearColor(0.025, 0.07, 0.12, 1);
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+            frames++;
+            frameId = session.requestAnimationFrame(frame);
+          } catch (error) { failed = true; log('Quadro VR', errorText(error)); finish(); }
+        }
+        const timer = setTimeout(finish, 3000);
+        stopObservation = finish;
+        session.addEventListener('inputsourceschange', collect);
+        collect();
+        try { frameId = session.requestAnimationFrame(frame); }
+        catch (error) { failed = true; log('Início dos quadros VR', errorText(error)); finish(); }
+      });
+    }
+    async function testSession() {
+      if (state.busy || state.disposed) return;
+      if (!window.isSecureContext || !navigator.xr || typeof navigator.xr.requestSession !== 'function') {
+        $('notice').textContent = 'A sessão VR exige um navegador compatível em um contexto seguro. Confira o relatório.';
+        return;
+      }
+      state.busy = true;
+      $('test').disabled = true; $('hands').disabled = true;
+      $('test').textContent = 'Teste em andamento…';
+      $('notice').textContent = 'Confirme a abertura nos óculos. O teste encerra a sessão automaticamente.';
+      state.attempts++; counters();
+      const wantsHands = $('hands').checked;
+      const optionalFeatures = wantsHands ? ['local-floor', 'hand-tracking'] : ['local-floor'];
+      let session = null, gl = null, success = false;
+      log('\nTeste ' + state.attempts, new Date().toLocaleString('pt-BR'));
+      log('Rastreamento de mãos solicitado', wantsHands ? 'Sim, como recurso opcional' : 'Não');
+      try {
+        // requestSession is called directly from the click, before any awaited check.
+        session = await navigator.xr.requestSession('immersive-vr', { optionalFeatures });
+        state.session = session; state.opened++; counters();
+        session.addEventListener('end', () => registerEnd(session), { once: true });
+        log('Sessão VR', 'Aberta');
+        if (state.disposed) return;
+        const enabled = session.enabledFeatures;
+        log('Mãos habilitadas pela sessão', enabled ? (Array.from(enabled).includes('hand-tracking') ? 'Sim; fontes de entrada serão verificadas separadamente' : 'Não informadas como habilitadas') : 'O navegador não expõe a lista de recursos habilitados');
+        try { await session.requestReferenceSpace('local-floor'); log('Referência espacial', 'local-floor disponível'); }
+        catch (_) { await session.requestReferenceSpace('local'); log('Referência espacial', 'local disponível; local-floor não concedido'); }
+        if (state.disposed || ended.has(session)) return;
+        const canvas = document.createElement('canvas');
+        gl = canvas.getContext('webgl2', { xrCompatible: true, powerPreference: 'high-performance' });
+        state.context = gl;
+        if (!gl) throw new Error('Não foi possível criar um contexto WebGL 2 para o teste.');
+        if (typeof gl.makeXRCompatible !== 'function') throw new Error('O navegador não oferece makeXRCompatible para este contexto.');
+        await gl.makeXRCompatible();
+        if (state.disposed || ended.has(session)) return;
+        log('WebGL 2 na sessão', 'Contexto compatível com XR');
+        gpuInfo(gl);
+        if (typeof window.XRWebGLLayer !== 'function') throw new Error('XRWebGLLayer não está disponível neste navegador.');
+        const layer = new window.XRWebGLLayer(session, gl);
+        session.updateRenderState({ baseLayer: layer });
+        log('Camada de imagem', 'Criada; observando quadros e fontes de entrada por até 3 segundos');
+        const observed = await observeSession(session, gl, layer);
+        log('Quadros VR recebidos', observed.frames);
+        log('Fontes de entrada simultâneas observadas', observed.maxInputs);
+        log('Fontes de mãos observadas', observed.hands.length ? observed.hands.join(', ') : 'Nenhuma neste intervalo; isso não prova ausência de suporte');
+        success = observed.frames > 0 && !observed.failed;
+        log('Resultado', success ? 'Sessão e camada de imagem responderam ao teste' : observed.failed ? 'Sessão aberta, mas a renderização apresentou erro' : 'Sessão aberta, mas nenhum quadro VR foi observado');
+      } catch (error) {
+        log('Falha no teste', errorText(error));
+      } finally {
+        if (stopObservation) stopObservation();
+        await closeSession(session);
+        releaseGL(gl);
+        state.busy = false; $('test').disabled = false; $('hands').disabled = false;
+        $('test').textContent = 'Testar sessão VR';
+        $('notice').textContent = session && !ended.has(session)
+          ? 'O navegador não confirmou o encerramento. Saia da sessão pelo menu dos óculos antes de testar novamente.'
+          : success ? 'Teste concluído e sessão encerrada. Consulte o relatório para os detalhes.' : 'Teste finalizado. Consulte o relatório para entender o resultado.';
+        // Do not allow a second request while an unconfirmed session may still be active.
+        if (session && !ended.has(session)) { state.busy = true; $('test').disabled = true; }
+      }
+    }
+    function downloadReport(text) {
+      const url = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+      const link = document.createElement('a');
+      link.href = url; link.download = 'portal360-diagnostico-vr.txt'; document.body.appendChild(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+    $('copy').addEventListener('click', async () => {
+      const text = ['Portal 360º VR · Diagnóstico', ...lines, '', 'Tentativas: ' + state.attempts, 'Sessões abertas: ' + state.opened, 'Sessões encerradas: ' + state.closed].join('\n');
+      try {
+        if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') throw new Error('Clipboard indisponível');
+        await navigator.clipboard.writeText(text);
+        $('notice').textContent = 'Diagnóstico copiado. Você já pode colar e compartilhar.';
+      } catch (_) {
+        try { downloadReport(text); $('notice').textContent = 'Cópia indisponível. O diagnóstico foi preparado como arquivo TXT para baixar.'; }
+        catch (_) { $('notice').textContent = 'Selecione o texto no relatório técnico para copiar manualmente.'; }
+      }
+    });
+    $('test').addEventListener('click', testSession);
+    function cleanup() {
+      state.disposed = true;
+      if (stopObservation) stopObservation();
+      if (state.session) void closeSession(state.session);
+      releaseGL(state.context);
+    }
+    window.addEventListener('pagehide', cleanup);
+    window.addEventListener('beforeunload', cleanup);
+    window.addEventListener('pageshow', event => { if (event.persisted) window.location.reload(); });
+    log('Consulta iniciada', new Date().toLocaleString('pt-BR'));
+    log('Navegador', navigator.userAgent);
+    const https = window.location.protocol === 'https:';
+    field('https', https ? 'Ativa' : 'Não utilizada', https ? 'good' : 'warn');
+    field('secure', window.isSecureContext ? 'Sim' : 'Não', window.isSecureContext ? 'good' : 'warn');
+    field('xr', navigator.xr ? 'Disponível' : 'Indisponível', navigator.xr ? 'good' : 'warn');
+    log('HTTPS', https ? 'Sim' : 'Não');
+    log('Contexto seguro', window.isSecureContext ? 'Sim' : 'Não');
+    log('WebXR', navigator.xr ? 'API disponível' : 'API indisponível');
+    let framed = false;
+    try { framed = window.top !== window; } catch (_) { framed = true; }
+    log('Página dentro de iframe', framed ? 'Sim; a política do contêiner também pode afetar XR' : 'Não');
+    probeGraphics();
+    if (!navigator.xr || !window.isSecureContext) { $('test').disabled = true; $('hands').disabled = true; }
+    Promise.allSettled([checkMode('immersive-vr', 'vr'), checkMode('immersive-ar', 'ar')]).then(() => { if (!state.disposed) refreshSummary(); });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+PORTAL 360º VR — ATUALIZAÇÃO DO HUB
+
+Este pacote deve ser aplicado SOBRE o projeto existente.
+Ele não é uma cópia completa do portal: apps, modelos, áudios,
+capas, logo e vídeos continuam nas pastas atuais.
+
+1. Faça uma cópia de segurança ou um commit da versão atual.
+2. Extraia os arquivos na raiz do portal, junto de apps/ e assets/.
+3. Substitua o index.html da raiz e copie a pasta hub/ inteira.
+4. Atualize diagnostico-vr.html.
+5. NÃO apague apps/ nem assets/. Preserve todos os arquivos dessas pastas.
+6. Mantenha o domínio já configurado no CNAME:
+   portal360.portaldoeducador.com.br
+7. Publique pelo procedimento habitual do repositório/GitHub Pages.
+8. Abra o site por HTTPS e recarregue a página. Para ir direto ao
+   catálogo, acrescente ?catalog=1 ao endereço da página inicial.
+9. Confira busca, filtros, capas e abertura de cada aplicação.
+10. Nos óculos, teste diagnostico-vr.html e depois a entrada real
+    em cada experiência, inclusive sair do VR e voltar ao catálogo.
+
+Não abra os arquivos diretamente por file:// para testar WebXR.
+Em desenvolvimento, use localhost; na escola, use o site HTTPS.
+Após preparar a aplicação, o hub solicita um novo clique em
+Entrar em VR para iniciar a sessão com uma ação explícita do aluno.
+
+PARA ADICIONAR FUTURAS APLICAÇÕES
+Edite hub/catalogo.js. Cadastre título, capa, caminho, categoria,
+etapas e formatos. Use status 'soon' enquanto não estiver pronta.
+Mude para 'available' somente após publicar e testar a aplicação.
+O README.md traz os campos e um exemplo de proposta para Pantanal.
+
+Favoritos e recentes são locais ao navegador, sem sincronização.
+Os controles, áudios e modos offline internos dos apps foram preservados.
+Esta entrega não publica o site automaticamente e não inclui
+homologação das cenas em um headset físico.
+
+README.md, INSTALAR.txt e tests/ são arquivos de apoio e não precisam
+ser publicados em produção.

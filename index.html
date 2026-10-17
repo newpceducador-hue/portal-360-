@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#091727">
+  <meta name="description" content="Portal 360º VR: um universo de experiências educacionais em 3D e realidade virtual. Explore, descubra e aprenda em novas dimensões.">
+  <title>Portal 360º VR — Conhecimento para explorar</title>
+  <link rel="icon" type="image/png" href="assets/logo-portal-educador.png">
+  <link rel="stylesheet" href="hub/hub.css">
+  <link rel="stylesheet" href="hub/launcher.css">
+  <script defer src="hub/catalogo.js"></script>
+  <script defer src="hub/core.js"></script>
+  <script defer src="hub/launcher.js"></script>
+  <script defer src="hub/media.js"></script>
+  <script defer src="hub/app.js"></script>
+  <script defer src="assets/sala/sala-cliente.js?v=1.7.0"></script>
+</head>
+<body class="intro-mode">
+  <a class="skip-link" href="#experiencias">Ir para as experiências</a>
+
+  <section id="intro" class="intro" aria-label="Boas-vindas ao Portal 360º VR">
+    <video id="introVideo" class="intro-video" playsinline preload="none" src="assets/abertura.mp4" poster="assets/abertura-poster.jpg" aria-label="Vídeo de abertura do Portal 360º VR"></video>
+    <div class="intro-shade" aria-hidden="true"></div>
+    <div id="startFallback" class="intro-welcome">
+      <div class="intro-brand-mark"><img src="assets/logo-portal-educador.png" alt="Portal do Educador" width="88" height="88"></div>
+      <p class="eyebrow">O aprendizado ganha novas dimensões</p>
+      <h1>Portal <span>360º</span> VR</h1>
+      <p class="intro-description">Grandes descobertas começam<br>com um novo olhar.</p>
+      <button id="btnStartIntro" class="button button-primary intro-start" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 10 7-10 7V5Z" fill="currentColor" stroke="none"/></svg>
+        Assistir à abertura
+      </button>
+      <p class="intro-audio-hint">A abertura começa com som.</p>
+    </div>
+    <div class="intro-controls">
+      <p id="introStatus" class="intro-status" role="status" aria-live="polite"></p>
+      <button id="btnIntroMute" class="button button-ghost" type="button" aria-pressed="false">Silenciar</button>
+      <button id="btnSkipIntro" class="button button-secondary" type="button">Ir para as experiências <span aria-hidden="true">→</span></button>
+    </div>
+  </section>
+
+  <main id="catalog" hidden>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="#experiencias" aria-label="Portal 360º VR — catálogo de experiências">
+          <span class="brand-mark"><img src="assets/logo-portal-educador.png" alt="" width="44" height="44"></span>
+          <span class="brand-name">Portal <strong>360º</strong> <span class="brand-vr">VR</span></span>
+        </a>
+        <nav class="header-actions" aria-label="Navegação principal">
+          <button id="btnFavorites" class="button button-ghost header-button" type="button" aria-pressed="false" aria-label="Mostrar favoritos">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-3-5.6 3 1.1-6.3L2.9 9.6l6.3-.9L12 3Z"/></svg>
+            <span>Favoritos</span>
+          </button>
+          <button id="btnIntro" class="button button-ghost header-button" type="button" aria-label="Rever abertura">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 9 6-9 6V6Z"/></svg>
+            <span>Rever abertura</span>
+          </button>
+          <button id="btnHelp" class="button button-ghost header-button" type="button" aria-label="Abrir ajuda">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 8.8a2.5 2.5 0 0 1 4.9.7c0 1.8-2.5 2-2.5 3.7M12 16.5h.01"/></svg>
+            <span>Ajuda</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <div class="shell">
+      <section id="heroFeatured" class="hero-featured" aria-labelledby="heroHeadline">
+        <div class="hero-copy">
+          <h1 id="heroHeadline">Conhecimento para <span>explorar.</span></h1>
+          <p class="hero-introduction">Novos mundos, novas perspectivas.</p>
+          <p id="deviceStatus" class="device-status" role="status" aria-live="polite">Verificando compatibilidade…</p>
+        </div>
+        <div class="hero-experience">
+          <div class="hero-image">
+            <div class="hero-orbit-art" aria-hidden="true"><i></i><i></i><i></i><span></span></div>
+            <img id="heroCover" src="assets/capa-sistema-solar-hero.webp" alt="" width="960" height="600" fetchpriority="high">
+          </div>
+          <div class="hero-image-shade" aria-hidden="true"></div>
+          <span class="featured-label"><span aria-hidden="true"></span>Em destaque</span>
+          <div class="hero-experience-copy">
+            <p id="heroCategory" class="hero-category">Universo</p>
+            <h2 id="heroTitle">Sistema Solar VR</h2>
+            <p id="heroSummary">Viaje pelos planetas e descubra o nosso lugar no Universo.</p>
+            <div class="hero-actions">
+              <button id="heroOpen" class="button button-primary" type="button">Explorar em 3D <span aria-hidden="true">↗</span></button>
+              <button id="heroDetails" class="button button-ghost" type="button">Ver detalhes <span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="resumeArea" class="resume-area" hidden>
+        <span class="resume-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2.7 7M3 5v6h6M12 7v5l3 2"/></svg>Sua última experiência</span>
+        <button id="resumeButton" class="button button-ghost" type="button">Retomar experiência <span aria-hidden="true">→</span></button>
+      </div>
+
+      <section id="experiencias" class="catalog-section" aria-labelledby="catalogTitle" tabindex="-1">
+        <div class="section-heading">
+          <div>
+            <h2 id="catalogTitle">Escolha sua próxima descoberta</h2>
+          </div>
+          <p id="resultCount" class="result-count" role="status" aria-live="polite">Carregando experiências…</p>
+        </div>
+
+        <div class="catalog-toolbar">
+          <div id="categoryControls" class="category-controls" role="group" aria-label="Filtrar por assunto"></div>
+          <div class="search-field">
+            <label class="sr-only" for="fBusca">Buscar experiências por nome ou assunto</label>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+            <input id="fBusca" type="search" placeholder="O que vamos explorar?" autocomplete="off" maxlength="150">
+          </div>
+        </div>
+
+        <details id="filterDetails" class="filter-details">
+          <summary><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="17" r="2"/></svg>Refinar descoberta<span class="filter-chevron" aria-hidden="true">⌄</span></summary>
+          <div class="filter-fields">
+            <label for="fSerie">Etapa escolar<select id="fSerie"><option value="">Todas as etapas</option><option value="efi">Fundamental — anos iniciais</option><option value="efii">Fundamental — anos finais</option><option value="em">Ensino Médio</option></select></label>
+            <label for="fFormato">Formato<select id="fFormato"><option value="">Todos os formatos</option><option value="3d">Exploração 3D</option><option value="vr">Realidade virtual</option><option value="360">Vídeo 360°</option><option value="simulacao">Simulação</option></select></label>
+            <label for="fOrdem">Organizar por<select id="fOrdem"><option value="recommended">Destaques</option><option value="title">Nome da experiência</option><option value="recent">Abertas recentemente</option></select></label>
+            <button id="clearFilters" class="button button-ghost" type="button">Limpar filtros</button>
+          </div>
+        </details>
+
+        <div id="gridCards" class="app-grid"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <div class="empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5M8 10.5h5"/></svg></div>
+          <h3>Nenhuma descoberta por aqui ainda</h3>
+          <p>Tente outro assunto ou ajuste os filtros para encontrar sua próxima experiência.</p>
+          <button id="resetEmpty" class="button button-secondary" type="button">Ver todas as experiências</button>
+        </div>
+      </section>
+
+      <details id="upcomingSection" class="upcoming-section">
+        <summary><span><span class="upcoming-dot" aria-hidden="true"></span>Em desenvolvimento</span><span class="upcoming-caption">O universo de descobertas continua crescendo <span aria-hidden="true">⌄</span></span></summary>
+        <div id="gridUpcoming" class="app-grid"></div>
+      </details>
+
+      <footer class="site-footer">
+        <div><span class="footer-brand">Portal <strong>360º</strong> VR</span><p>Um hub em expansão, com novas experiências ao longo do tempo.</p></div>
+        <div class="footer-links"><span>Portal do Educador · NewPC Tecnologia</span><a href="diagnostico-vr.html">Verificar meu dispositivo <span aria-hidden="true">↗</span></a></div>
+      </footer>
+    </div>
+  </main>
+
+  <dialog id="detailDialog" class="detail-dialog" aria-label="Sobre a experiência">
+    <button id="closeDetail" class="icon-button dialog-close" type="button" aria-label="Fechar detalhes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    <div id="detailBody"></div>
+  </dialog>
+
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle">
+    <button id="closeHelp" class="icon-button dialog-close" type="button" aria-label="Fechar ajuda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    <div class="dialog-content">
+      <p class="eyebrow">Pronto para explorar?</p>
+      <h2 id="helpTitle">Cada descoberta começa aqui.</h2>
+      <div class="help-steps">
+        <div class="help-step"><span class="help-number" aria-hidden="true">01</span><div><h3>Encontre seu assunto</h3><p>Use a busca e os filtros para escolher uma experiência. Abra os detalhes para conhecer os recursos e as etapas escolares indicadas.</p></div></div>
+        <div class="help-step"><span class="help-number" aria-hidden="true">02</span><div><h3>Escolha como explorar</h3><p>No computador, tablet ou lousa, use a exploração em 3D quando disponível. Nos óculos compatíveis, escolha “Entrar em VR”. Os formatos variam entre as experiências.</p></div></div>
+        <div class="help-step"><span class="help-number" aria-hidden="true">03</span><div><h3>Descubra no seu ritmo</h3><p>Consulte os controles dentro de cada aplicação. Para escolher outra, saia da imersão e use “Voltar ao catálogo”. Você volta às suas descobertas, sem repetir a abertura.</p></div></div>
+      </div>
+      <div class="help-note"><h3>Para uma boa experiência em VR</h3><p>Ajuste os óculos, confirme seu espaço seguro e comece com sessões curtas. Faça uma pausa se sentir desconforto.</p></div>
+      <a class="button button-secondary" href="diagnostico-vr.html">Verificar compatibilidade do dispositivo <span aria-hidden="true">↗</span></a>
+      <p class="help-storage muted">Favoritos e experiências recentes ficam salvos neste navegador.</p>
+    </div>
+  </dialog>
+
+  <dialog id="lessonDialog" class="lesson-dialog" aria-labelledby="lessonTitle">
+    <div id="lessonFullscreen" class="lesson-shell">
+    <div class="lesson-heading"><div><p class="eyebrow">Para começar a descoberta</p><h2 id="lessonTitle">Aula de abertura</h2></div><button id="closeLesson" class="icon-button" type="button" aria-label="Fechar videoaula"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div id="lessonFrame" class="lesson-frame"></div>
+    <div class="lesson-footer"><a id="lessonExternal" class="button button-ghost" href="#" target="_blank" rel="noopener noreferrer">Abrir vídeo em outra aba <span aria-hidden="true">↗</span></a><button id="lessonContinue" class="button button-primary" type="button">Explorar em 3D <span aria-hidden="true">→</span></button></div>
+    </div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <noscript><style>#intro{display:none}body{overflow:auto!important}</style><div class="noscript-content"><h1>Portal 360º VR</h1><p>Ative o JavaScript para usar os filtros e abrir as experiências pelo catálogo. Você também pode acessar os endereços:</p><ul><li><a href="apps/sistema-solar/">Sistema Solar</a></li><li><a href="apps/dna/">DNA</a></li><li><a href="apps/corpo-humano/">Corpo Humano</a></li><li><a href="apps/terra/">Terra por Dentro</a></li><li><a href="apps/celula/">Célula</a></li></ul><p>As aplicações interativas também precisam de JavaScript.</p></div></noscript>
+</body>
+</html>
