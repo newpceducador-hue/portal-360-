@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portal 360º VR · Modo Estande</title>
+<link rel="icon" href="assets/logo.png">
+<style>
+:root{--verde:#1a6b2a;--azul:#0f2c4a;--claro:#7CFFB8}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#020812;color:#eaf6ff;font-family:"Segoe UI",Arial,sans-serif;overflow:hidden}
+#palco{position:fixed;inset:0;width:100%;height:100%;display:block}
+#painel{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,rgba(15,44,74,.92),rgba(2,8,18,.97));z-index:10}
+#painel.oculto{display:none}
+.caixa{max-width:560px;width:calc(100% - 32px);text-align:center;padding:28px 24px;border:1px solid rgba(124,255,184,.35);border-radius:22px;background:rgba(4,16,30,.85)}
+.caixa img{width:84px;height:84px;border-radius:50%;margin-bottom:10px}
+.caixa h1{margin:4px 0 6px;font-size:28px}
+.caixa p{margin:6px 0 14px;color:#bcd8ea;line-height:1.45}
+.botoes{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.botoes button{font:700 20px "Segoe UI",Arial;padding:16px;border-radius:999px;border:2px solid var(--claro);background:linear-gradient(135deg,#19c96a,#0F9861);color:#fff;cursor:pointer}
+.botoes button.sec{background:transparent;border-color:#37B1DA;color:#bfe9ff;font-size:17px;padding:12px}
+.contador{margin-top:16px;font-size:13px;color:#8fb0c2}
+.dica{margin-top:10px;font-size:12px;color:#6f8ea1;line-height:1.5;text-align:left}
+#legenda{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);max-width:min(760px,calc(100% - 32px));font-weight:600;padding:12px 18px;border-radius:14px;background:rgba(3,12,24,.78);font-size:20px;line-height:1.4;text-align:center;z-index:5}
+#legenda:empty{display:none}
+#barra{position:fixed;top:12px;right:12px;z-index:6;display:flex;gap:8px}
+#barra button{font:600 13px "Segoe UI",Arial;padding:8px 12px;border-radius:999px;border:1px solid #37B1DA;background:rgba(4,16,30,.8);color:#cfe8f6;cursor:pointer}
+</style>
+</head>
+<body>
+<canvas id="palco"></canvas>
+<div id="legenda"></div>
+<div id="barra" hidden><button type="button" data-action="voltar">◀ Voltar</button><button type="button" data-action="pular">Avançar ▶</button><button type="button" data-action="parar">Encerrar</button></div>
+<div id="painel">
+  <div class="caixa">
+    <img src="assets/logo.png" alt="">
+    <h1>Portal 360º VR</h1>
+    <p>Modo Estande · uma amostra imersiva de 4 minutos: do espaço até dentro de uma célula, com narração e interação.</p>
+    <div class="botoes">
+      <button type="button" data-action="vr" id="btnVR">🥽 Entrar no VR</button>
+      <button type="button" class="sec" data-action="tela">Ver o tour nesta tela</button>
+    </div>
+    <div class="contador" id="contador"></div>
+    <div class="dica"><b>Para a equipe do estande:</b> entre no VR uma vez e entregue o óculos. Cada visitante aperta o gatilho para começar e pode usar as setas "Voltar" e "Avançar" da cena (aponta e aperta o gatilho) para ir no próprio ritmo; no fim, o visitante responde a pesquisa rápida (aponta para uma carinha e aperta o gatilho) e o tour volta sozinho à tela de espera. O resultado da pesquisa aparece aqui embaixo, no contador. Botão A (ou X): pula a cena. Botão B (ou Y): volta à espera. Para quem está na fila ver junto, transmita o óculos para a TV do estande (menu do Quest › Transmitir).</div>
+    <div class="dica">Modelos anatômicos (coração e corpo humano): Z-Anatomy, CC BY-SA 4.0.</div>
+  </div>
+</div>
+<script src="vendor/three.r128.min.js"></script>
+<script src="vendor/GLTFLoader.r128.js"></script>
+<script src="snap/celula-data.js"></script>
+<script src="snap/celula-models.js"></script>
+<script src="snap/terra-data.js"></script>
+<script src="snap/terra-models.js"></script>
+<script src="snap/dna-data.js"></script>
+<script src="snap/dna-models.js"></script>
+<script src="legendas.js?v=1.5.1"></script>
+<script src="estande.js?v=1.5.1"></script>
+</body>
+</html>

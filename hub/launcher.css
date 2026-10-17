@@ -1,0 +1,48 @@
+/* Kept in its own namespace so legacy experience styles cannot leak into the hub. */
+.ph-launcher{position:fixed;inset:0;box-sizing:border-box;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;color:#eef6fd;background:#070f1b;z-index:2147483647;font-family:Inter,"Segoe UI",Arial,sans-serif;overflow:hidden;color-scheme:dark}
+.ph-launcher::backdrop{background:rgba(3,9,17,.9)}
+.ph-launcher[open]{display:block}
+.ph-launcher *{box-sizing:border-box}
+.ph-launcher [hidden]{display:none!important}
+.ph-launch-shell{height:100%;height:100dvh;display:flex;flex-direction:column}
+.ph-launch-bar{position:relative;z-index:3;display:flex;align-items:center;gap:16px;min-height:76px;padding:12px 24px;border-bottom:1px solid #223449;background:#0b1726;flex:none}
+.ph-launch-heading{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.ph-launch-heading strong{font-size:15px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ph-launch-heading span{color:#aec2d4;font-size:11px;line-height:1.35;max-width:560px}
+.ph-launch-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.ph-launch-button,.ph-launch-back,.ph-launch-icon{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 15px;border:1px solid #34506b;border-radius:10px;background:#12263c;color:#eef6fd;font:600 13px/1.3 Inter,"Segoe UI",Arial,sans-serif;text-decoration:none;cursor:pointer;transition:background .16s,border-color .16s;white-space:nowrap}
+.ph-launch-button:hover,.ph-launch-back:hover,.ph-launch-icon:hover{background:#1a3551;border-color:#6b9cb9}
+.ph-launch-button-primary{background:#56c9e7;color:#06263b;border-color:#56c9e7}
+.ph-launch-button-primary:hover{background:#83dbef;color:#06263b;border-color:#83dbef}
+.ph-launch-button:disabled{opacity:.55;cursor:wait}
+.ph-launch-button svg,.ph-launch-back svg,.ph-launch-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ph-launch-back{background:transparent;padding-left:0;border-color:transparent;color:#d1e3f1}
+.ph-launch-back:hover{background:transparent;border-color:transparent;color:#72d7ee}
+.ph-launch-icon{width:44px;padding:0;background:transparent}
+.ph-launcher :focus-visible{outline:3px solid #85dafa;outline-offset:4px}
+.ph-launch-stage{position:relative;min-height:0;flex:1;isolation:isolate;background:#050b13}
+.ph-launch-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#050b13;opacity:0;pointer-events:none}
+.ph-launcher.is-viewing .ph-launch-frame{opacity:1;pointer-events:auto}
+.ph-launch-prep{position:absolute;inset:0;display:grid;place-items:center;overflow:auto;padding:40px 24px;background:radial-gradient(ellipse at 55% 20%,#102c45 0,transparent 62%),#070f1b;z-index:1}
+.ph-launch-card{display:grid;grid-template-columns:minmax(180px,.72fr) minmax(310px,1fr);width:min(900px,100%);border:1px solid #294258;border-radius:22px;overflow:hidden;background:#0e1e30;box-shadow:0 25px 80px #0005}
+.ph-launch-art{min-height:340px;position:relative;background:radial-gradient(ellipse at 70% 25%,#1b6381,transparent 60%),linear-gradient(150deg,#163952,#0a1b30);overflow:hidden;display:grid;place-items:center}
+.ph-launch-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph-launch-art::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#07182788,transparent 70%);pointer-events:none}
+.ph-launch-art-mark{width:110px;height:110px;display:grid;place-items:center;border:1px solid #76c7de40;border-radius:28px;transform:rotate(-8deg);background:#15526c55;color:#83d3e8}
+.ph-launch-art-mark svg{width:62px;height:62px;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+.ph-launch-art.has-image .ph-launch-art-mark{display:none}
+.ph-launch-copy{padding:38px 34px;align-self:center}
+.ph-launch-eyebrow{font-size:10px;font-weight:750;letter-spacing:.18em;color:#70cadf}
+.ph-launch-copy h2{font-size:clamp(24px,3vw,32px);font-weight:650;letter-spacing:-.035em;line-height:1.15;margin:16px 0}
+.ph-launch-copy p{font-size:14px;line-height:1.7;color:#becddd;margin:0}
+.ph-launch-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.ph-launch-actions .ph-launch-button{min-height:46px}
+.ph-launch-copy .ph-launch-note{font-size:11px;line-height:1.65;color:#8fa8bd;margin-top:22px}
+.ph-launch-progress{display:flex;gap:6px;margin:20px 0 0}
+.ph-launch-progress>span:not(.ph-sr-only){width:5px;height:5px;border-radius:50%;background:#63cbe6;animation:ph-launch-breathe 1.4s ease-in-out infinite}
+.ph-launch-progress>span:nth-child(2){animation-delay:.15s}.ph-launch-progress>span:nth-child(3){animation-delay:.3s}
+.ph-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}
+@keyframes ph-launch-breathe{0%,100%{opacity:.25}50%{opacity:1}}
+@media(max-width:900px){.ph-launch-bar{padding:10px 16px;gap:10px}.ph-launch-heading span{max-width:240px}.ph-launch-tools{gap:6px}.ph-launch-tools .ph-launch-button{font-size:11px;padding:9px 10px}.ph-launch-tools .ph-launch-icon{display:none}}
+@media(max-width:620px){.ph-launch-bar{display:grid;grid-template-columns:auto 1fr;gap:8px 14px}.ph-launch-heading span{max-width:none;font-size:10px}.ph-launch-tools{grid-column:1/-1;justify-content:flex-start;padding-left:0}.ph-launch-tools .ph-launch-button{min-height:40px}.ph-launch-back{font-size:12px}.ph-launch-card{grid-template-columns:1fr;max-width:420px}.ph-launch-art{min-height:125px;height:125px}.ph-launch-art-mark{width:65px;height:65px;border-radius:18px}.ph-launch-art-mark svg{width:40px;height:40px}.ph-launch-copy{padding:26px 24px}.ph-launch-prep{padding:18px}.ph-launch-actions{gap:8px}.ph-launch-actions .ph-launch-button{font-size:12px}.ph-launch-heading strong{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.ph-launcher *{animation:none!important;transition:none!important}.ph-launch-progress>span:not(.ph-sr-only){opacity:.7}}

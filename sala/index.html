@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portal Maestro VR · Sala do professor</title>
+<meta name="description" content="Painel do professor do Portal 360º VR: acompanhe cada óculos e conduza a turma.">
+<link rel="icon" href="../assets/sala/pde-256.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--noite:#05091a;--azul:#0F2C4A;--azul2:#16406b;--azul3:#184489;--ciano:#3ea8ce;--lima:#a6c544;--lima-esc:#557a1f;--ambar:#e0a321;--vermelho:#c0392b;--fundo:#f3f6fa;--card:#fff;--texto:#0F2C4A;--suave:#5b6b7a;--borda:#dbe3ec;--alerta:#e0a321;--erro:#c0392b;--grad:linear-gradient(135deg,#184489 0%,#3ea8ce 100%)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--fundo);color:var(--texto);font-family:Inter,system-ui,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh}
+button{font:inherit;cursor:pointer}
+header{display:flex;align-items:center;gap:14px;padding:12px 22px;background:linear-gradient(120deg,var(--noite) 0%,var(--azul2) 100%);color:#fff;position:sticky;top:0;z-index:5;border-bottom:4px solid;border-image:linear-gradient(90deg,var(--ciano),var(--lima)) 1}
+header img{width:46px;height:46px}
+header .tit b{display:block;font-size:20px;font-weight:800}header .tit span{font-size:12px;opacity:.8}
+header .esp{flex:1}
+header .btn{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);color:#fff}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.1);font-weight:700;font-size:13px}
+.ponto{width:10px;height:10px;border-radius:50%;background:var(--lima);display:inline-block}.ponto.off{background:#9aa7b3}.ponto.alerta{background:var(--ambar)}
+.btn{border:1px solid var(--borda);background:#e6ebf0;color:var(--azul);padding:10px 14px;border-radius:10px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover{filter:brightness(1.05)}.btn.pri{background:var(--grad);border-color:transparent;color:#fff}.btn.azul{background:var(--azul);border-color:transparent;color:#fff}.btn.perigo{background:var(--vermelho);border-color:transparent;color:#fff}.btn.grande{padding:15px 24px;font-size:17px;border-radius:12px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+main{padding:22px;max-width:1500px;margin:0 auto}
+.painel{background:var(--card);border:1px solid var(--borda);border-radius:14px}
+/* abertura */
+.abrir{max-width:760px;margin:6vh auto;text-align:center}
+.abrir h1{font-size:clamp(28px,4vw,40px);margin:0 0 6px;font-weight:800}.abrir .slogan{margin:0 0 12px;font-weight:700;color:var(--azul3)}.abrir p{color:var(--suave);font-size:17px;line-height:1.55}
+.abrir .acoes{display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;text-align:left}
+.passos div{background:var(--card);border:1px solid var(--borda);border-radius:14px;padding:14px}.passos b{display:block;color:var(--azul3);font-size:12px;letter-spacing:.06em;margin-bottom:4px}.passos span{font-size:14px;color:var(--suave)}
+/* topo da sala */
+.barra{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:stretch;margin-bottom:16px}
+.codigo{background:linear-gradient(135deg,var(--azul) 0%,var(--noite) 100%);color:#fff;border-radius:14px;padding:16px 24px;text-align:center;min-width:230px;border-bottom:4px solid var(--lima)}
+.codigo small{display:block;opacity:.75;font-size:12px;letter-spacing:.12em;text-transform:uppercase}.codigo b{display:block;font-size:58px;letter-spacing:.16em;line-height:1.05}.codigo span{font-size:12px;opacity:.75}
+.resumo{padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.resumo-cab{display:flex;align-items:center;gap:12px}.resumo-cab h2{margin:0;font-size:16px;font-weight:800}.resumo-cab .dur{color:var(--suave);font-size:13px;margin-right:auto;font-variant-numeric:tabular-nums}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.tile{background:var(--fundo);border-radius:12px;padding:10px 12px;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center}
+.tile .ic{grid-row:1/span 2;font-size:22px}.tile b{font-size:22px;line-height:1}.tile small{font-size:12px;color:var(--suave)}
+.tile.ativo{background:#fff3d6;box-shadow:inset 0 0 0 2px var(--ambar)}
+/* barra de ações em grupos */
+.acoes-sala{display:grid;grid-template-columns:2.3fr 1fr 1fr;margin-bottom:16px;overflow:hidden}
+.grupo{padding:14px 16px;display:flex;flex-direction:column;gap:10px}.grupo+.grupo{border-left:1px solid var(--borda)}
+.grupo-rot{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--suave)}
+.linha{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.linha>label{flex-basis:100%;font-size:12px;color:var(--suave);font-weight:700;margin-bottom:-2px}
+.app-btn .qt{background:var(--lima);color:var(--noite);border-radius:999px;font-size:11px;padding:1px 7px;margin-left:2px}
+select{background:#fff;color:var(--texto);border:1px solid var(--borda);border-radius:9px;padding:9px 10px;font:600 14px Inter,system-ui;min-width:0;flex:1 1 140px}
+.grupo .col{display:grid;gap:8px}
+/* mãos e pesquisa */
+.aviso-maos{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fff3d6;border:2px solid var(--ambar);color:#6b4b00;border-radius:14px;padding:12px 16px;margin-bottom:16px;font-weight:700}
+.mao-ani{display:inline-block;font-size:26px;animation:aceno 1s ease-in-out infinite;transform-origin:70% 90%}
+.aviso-maos .quem{display:flex;gap:8px;flex-wrap:wrap;flex:1}.aviso-maos .quem button{border:0;background:#fff;color:#6b4b00;border-radius:20px;padding:6px 12px;font-size:13px;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+@keyframes aceno{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(14deg)}}
+@keyframes tremor{0%,100%{transform:translateX(0)}15%{transform:translateX(-7px)}30%{transform:translateX(6px)}45%{transform:translateX(-5px)}60%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
+.tremer{animation:tremor .55s ease-in-out}
+.pesq{padding:14px 16px;margin-bottom:16px;display:flex;flex-direction:column;gap:10px}
+.pesq-topo{display:flex;align-items:center;gap:10px}.pesq-topo .rot{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--azul3)}.pesq-topo .pg{font-weight:700;flex:1}
+.termometro{display:flex;height:14px;border-radius:8px;overflow:hidden;background:#e6ebf0}.termometro i{display:block;height:100%}
+.t-verde{background:var(--lima)}.t-amarelo{background:var(--ambar)}.t-vermelho{background:#e5675a}
+.legenda{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--suave)}.legenda b{color:var(--texto);font-size:16px;margin-right:3px}.legenda .bol{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+/* cards dos óculos */
+.turma-cab{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}.turma-cab h2{margin:0;font-size:16px;font-weight:800}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--borda);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;position:relative}
+.card.off{opacity:.6}
+.card.mao{border-color:var(--ambar);box-shadow:0 0 0 2px var(--ambar);animation:piscaMao 1.2s ease-in-out infinite}
+@keyframes piscaMao{50%{box-shadow:0 0 0 6px rgba(224,163,33,.35)}}
+.mao-card{display:flex;align-items:center;gap:8px;background:#fff3d6;color:#6b4b00;border-radius:10px;padding:6px 10px;font-size:13px;font-weight:700}.mao-card .mao-ani{font-size:20px}.mao-card button{margin-left:auto;border:0;background:var(--ambar);color:#fff;border-radius:7px;padding:4px 10px;font-size:12px;font-weight:700}
+.st{font-size:12px;font-weight:800;align-self:flex-start;padding:3px 10px;border-radius:999px}.st.ok{background:#eef5dc;color:var(--lima-esc)}.st.parado{background:#fff3d6;color:#8a6100}.st.menu{background:#e3f3fa;color:#1d6d8c}.st.tirou{background:#fde7e5;color:var(--vermelho)}
+.card.atn{border-color:rgba(224,163,33,.7)}
+.eng{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--suave)}
+.aten{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;font-size:12px;color:var(--suave)}.aten b{color:var(--texto);font-size:12px}
+.barra-at{height:6px;border-radius:999px;background:#e6ebf0;overflow:hidden}.barra-at i{display:block;height:100%;background:var(--lima)}.barra-at.med i{background:var(--ambar)}.barra-at.bx i{background:#e5675a}.barra-at.azul i{background:var(--ciano)}
+.card h3{margin:0;font-size:19px;display:flex;align-items:center;gap:8px;font-weight:800}
+.card .app{font-size:13px;color:var(--azul3);font-weight:700}
+.card .missao{font-size:15px;line-height:1.35;min-height:40px}
+.card .meta{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:800;letter-spacing:.04em;padding:3px 8px;border-radius:999px;background:#e6ebf0;color:var(--suave)}
+.tag.vr{background:#eef5dc;color:var(--lima-esc)}.tag.bat{background:#fff3d6;color:#8a6100}.tag.bat.baixa{background:#fde7e5;color:var(--vermelho)}.tag.rep{background:#fde7e5;color:var(--vermelho)}
+.tag.p-verde{background:#eef5dc;color:var(--lima-esc)}.tag.p-amarelo{background:#fff3d6;color:#8a6100}.tag.p-vermelho{background:#fde7e5;color:var(--vermelho)}
+.prog{height:8px;border-radius:999px;background:#e6ebf0;overflow:hidden}.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--ciano),var(--lima))}
+.num{display:flex;justify-content:space-between;font-size:12px;color:var(--suave)}
+.card .acoes{display:flex;gap:6px;margin-top:4px}.card .acoes .btn{padding:7px 10px;font-size:12px;flex:1;justify-content:center}
+.vazio{grid-column:1/-1;text-align:center;color:var(--suave);padding:40px;border:2px dashed var(--borda);border-radius:14px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--azul);color:#fff;padding:11px 18px;border-radius:10px;font-weight:700;z-index:20;opacity:0;transition:opacity .3s;pointer-events:none}.toast.on{opacity:1}
+.aviso-cfg{max-width:640px;margin:10vh auto;background:var(--card);border:1px solid var(--alerta);border-radius:14px;padding:22px;line-height:1.55}
+.aviso-cfg code{background:var(--fundo);padding:2px 6px;border-radius:6px}
+.modal-fundo{position:fixed;inset:0;background:rgba(10,31,53,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:30}
+.modal{background:#fff;border-radius:14px;padding:22px;width:100%;max-width:460px}.modal h3{margin:0 0 4px}.modal p{margin:0 0 10px;color:var(--suave);font-size:13px}
+.modal input{width:100%;padding:11px 12px;border:1px solid var(--borda);border-radius:9px;font:inherit;color:var(--texto)}.modal .rodape{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+footer{color:var(--suave);font-size:12px;text-align:center;padding:24px}
+@media(max-width:1100px){.acoes-sala{grid-template-columns:1fr}.grupo+.grupo{border-left:0;border-top:1px solid var(--borda)}.tiles{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:820px){.barra{grid-template-columns:1fr}.passos{grid-template-columns:1fr}.codigo b{font-size:46px}header .tit span{display:none}.tiles{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header>
+ <img src="../assets/sala/pde-256.png" alt="Portal do Educador">
+ <div class="tit"><b>Portal Maestro VR</b><span>Portal do Educador · Sala do professor nos óculos</span></div>
+ <div class="esp"></div>
+ <span class="chip" id="conexao" hidden><span class="ponto"></span><span>Conectado</span></span>
+ <button class="btn" data-action="tela-cheia">⛶ Tela cheia</button>
+</header>
+<main id="app"></main>
+<div class="toast" id="toast"></div>
+<footer>Portal Maestro VR · Portal 360º · Portal do Educador · NEWPC Tecnologia. Os óculos só enviam o número do óculos e o andamento da atividade; nenhum dado pessoal do aluno é registrado.</footer>
+<script>
+(function(){'use strict';
+/* endereço do banco (o mesmo do sala-cliente.js); ?saladb= sobrescreve para teste */
+const DB_PADRAO='https://portal360-sala-default-rtdb.firebaseio.com';
+const q=new URLSearchParams(location.search);
+const LS={get:k=>{try{return localStorage.getItem(k);}catch(_){return null;}},set:(k,v)=>{try{localStorage.setItem(k,v);}catch(_){}},del:k=>{try{localStorage.removeItem(k);}catch(_){}}};
+if(q.get('saladb'))LS.set('portal360_sala_db',q.get('saladb').replace(/\/+$/,''));
+const DB=(LS.get('portal360_sala_db')||DB_PADRAO||'').replace(/\/+$/,'');
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const APPS={corpo:'Corpo Humano Imersivo',terra:'Terra por Dentro',dna:'DNA Imersivo',solar:'Sistema Solar VR'};
+/* vídeo-aulas. YouTube (yt = código de 11 caracteres do link youtu.be/XXXXXXXXXXX): o óculos sai do VR, assiste em tela cheia e volta com 1 toque.
+   MP4 hospedado no Portal (src): toca num telão dentro do VR, sem sair. Para incluir uma aula, acrescente uma linha aqui. */
+const AULAS_VIDEO=[{titulo:'Sistema Solar · aula',yt:'ZtPpHocvT7A'},{titulo:'Abertura do Portal 360º (MP4, telão no VR)',src:'assets/abertura.mp4'}];
+const APPS_BOTOES=[['solar','🪐','Sistema Solar'],['corpo','🫀','Corpo Humano'],['terra','🌍','Terra por Dentro'],['dna','🧬','DNA'],['catalogo','🏠','Catálogo']];
+/* mapas das missões: os desta sala + os guardados de aulas anteriores (o painel lembra, assim as missões aparecem antes de algum óculos abrir o app) */
+function mapas(){let c={};try{c=JSON.parse(localStorage.getItem('portal360_mapas')||'{}')||{};}catch(_){c={};}const m=Object.assign(c,(sala&&sala.mapas)||{});
+  try{if(sala&&sala.mapas&&Object.keys(sala.mapas).length)localStorage.setItem('portal360_mapas',JSON.stringify(m));}catch(_){}return m;}
+let codigo=null,sala={},es=null,poll=0,offset=0,inicio=0,timer=0,refetch=0;
+const SV={'.sv':'timestamp'};
+let ultimoErro='';
+async function rede(m,p,b){try{const r=await fetch(DB+'/'+p+'.json',{method:m,headers:{'Content-Type':'application/json'},body:b===undefined?undefined:JSON.stringify(b),cache:'no-store'});if(!r.ok){ultimoErro='HTTP '+r.status+(r.status===401?' (regras do Firebase não permitem: confira a aba Regras)':'');return null;}ultimoErro='';return await r.json();}catch(e){ultimoErro='rede: '+(e&&e.message||e);return null;}}
+const codValido=c=>typeof c==='string'&&/^\d{4}$/.test(c);
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2600);}
+const agora=()=>Date.now()+offset;
+
+/* ---------- telas ---------- */
+function telaConfig(){$('app').innerHTML='<div class="aviso-cfg"><h2>Sala ainda não configurada</h2><p>O endereço do banco de dados da Sala do professor ainda não foi definido. Depois de criar o projeto Firebase (Realtime Database), ele entra nas constantes <code>DB_PADRAO</code> deste painel e do <code>sala-cliente.js</code>.</p><p>Para teste, abra este painel com <code>?saladb=https://SEU-PROJETO.firebaseio.com</code>.</p></div>';}
+function telaAbrir(){let ant=LS.get('portal360_sala_prof');if(!codValido(ant)){LS.del('portal360_sala_prof');ant=null;}
+  $('app').innerHTML='<section class="abrir"><h1>Conduza a turma no VR</h1><p class="slogan">O professor conduz, a turma acompanha.</p><p>Abra a sala, mostre o código na lousa e cada óculos entra digitando os 4 números. Você acompanha o que cada aluno está fazendo e leva todos para a mesma missão com um toque.</p><div class="acoes"><button class="btn pri grande" data-action="abrir">▶ Abrir nova sala</button>'+(ant?'<button class="btn azul grande" data-action="reabrir">↻ Reabrir sala '+esc(ant)+'</button>':'')+'</div><div class="passos"><div><b>1 · ABRA A SALA</b><span>Mostre o código na lousa ou na TV.</span></div><div><b>2 · NOS ÓCULOS</b><span>No catálogo, toque em "🎓 Entrar na sala", digite o código e o número do óculos.</span></div><div><b>3 · CONDUZA</b><span>Acompanhe os cards, leve todos para uma missão, pause e chame a atenção.</span></div></div></section>';}
+function telaSala(){
+  $('app').innerHTML='<section class="barra"><div class="codigo"><small>Código da sala</small><b id="cod">'+codigo+'</b><span>No óculos: 🎓 Entrar na sala</span></div>'+
+   '<div class="painel resumo"><div class="resumo-cab"><h2>Painel da aula</h2><span class="dur"><span id="tempo">00:00</span> de aula</span><button class="btn perigo" data-action="encerrar">■ Encerrar aula</button></div><div class="tiles">'+
+   '<div class="tile"><span class="ic">🥽</span><b id="nOn">0</b><small>óculos conectados</small></div>'+
+   '<div class="tile"><span class="ic">✨</span><b id="nVR">0</b><small>dentro do VR</small></div>'+
+   '<div class="tile t-mao"><span class="ic">✋</span><b id="nMaos">0</b><small>mãos levantadas</small></div>'+
+   '<div class="tile"><span class="ic">💬</span><b id="nResp">0</b><small>respostas na pesquisa</small></div>'+
+   '<div class="tile" id="tAlerta"><span class="ic">⚠️</span><b id="nAlerta">0</b><small>precisam de atenção</small></div>'+
+   '</div></div></section>'+
+   '<section class="painel acoes-sala">'+
+    '<div class="grupo"><span class="grupo-rot">Conduzir a aula</span>'+
+     '<div class="linha apps"><label>Abrir nos óculos</label>'+APPS_BOTOES.map(([k,ic,n])=>'<button class="btn app-btn" data-action="abrir-app" data-app="'+k+'">'+ic+' '+n+'<span class="qt" id="qt-'+k+'" hidden></span></button>').join('')+'</div>'+
+     '<div class="linha"><label>Levar para a missão</label><select id="selApp"></select><select id="selSec"></select><select id="selMis"></select><button class="btn pri" data-action="ir-todos">➜ Levar todos</button></div>'+
+     '<div class="linha"><label>Vídeo-aula</label><select id="selVideo">'+AULAS_VIDEO.map((a,i)=>'<option value="'+i+'">'+esc(a.titulo)+'</option>').join('')+'</select><button class="btn pri" data-action="video">▶ Passar</button><button class="btn" data-action="video-pausa">⏸</button><button class="btn" data-action="video-play">▶</button><button class="btn" data-action="video-fim">■ Fechar</button></div>'+
+    '</div>'+
+    '<div class="grupo"><span class="grupo-rot">Ouvir a turma</span><div class="col">'+
+     '<button class="btn pri" data-action="pesquisa-abrir" title="Cada aluno responde no VR: Entendi, Mais ou menos ou Não entendi">📊 Pesquisa rápida</button>'+
+     '<span style="font-size:12px;color:var(--suave)">✋ Para levantar a mão, o aluno ergue o controle acima da cabeça.</span>'+
+    '</div></div>'+
+    '<div class="grupo"><span class="grupo-rot">Óculos dos alunos</span><div class="col">'+
+     '<button class="btn azul" data-action="pausa" title="Pausa a atividade e mostra uma mensagem motivacional">⏸ Pausar com mensagem</button>'+
+     '<button class="btn" data-action="retomar">▶ Retomar</button>'+
+     '<button class="btn" data-action="chamar-todos" title="Cada óculos mostra o próprio número por 5 segundos">🔔 Identificar óculos</button>'+
+    '</div></div>'+
+   '</section>'+
+   '<div class="aviso-maos" id="avisoMaos" hidden></div>'+
+   '<section class="painel pesq" id="cardPesq" hidden><div class="pesq-topo"><span class="rot">📊 Pesquisa rápida</span><span class="pg" id="pqTexto"></span><button class="btn" data-action="pesquisa-fim">Encerrar</button></div><div class="termometro" id="pqTerm"></div><div class="legenda" id="pqLeg"></div></section>'+
+   '<div class="turma-cab"><h2>Óculos na sala</h2></div>'+
+   '<section class="grade" id="grade"></section>'+
+   '<div class="modal-fundo" id="modalPesq" hidden><div class="modal"><h3>📊 Pesquisa rápida</h3><p>Cada aluno responde no óculos, apontando o controle: Entendi, Mais ou menos ou Não entendi. Só você vê as respostas.</p><input id="pqPergunta" maxlength="140" value="Entenderam a explicação?"><div class="rodape"><button class="btn" data-action="pesquisa-cancelar">Cancelar</button><button class="btn pri" data-action="pesquisa-enviar">Enviar para os óculos</button></div></div></div>';
+  preencherSelects();desenhar();}
+
+/* ---------- sala: abrir, ouvir, comandar ---------- */
+async function medirRelogio(){const t0=Date.now();const r=await rede('PUT','relogio/professor',SV);const t1=Date.now();if(typeof r==='number')offset=r-(t0+t1)/2;}
+async function abrir(cod){
+  if(!codValido(cod))cod=null;
+  if(!cod){for(let i=0;i<12;i++){const c=String(1000+Math.floor(Math.random()*9000));const ex=await rede('GET','salas/'+c+'/aberta');if(ex!==true){cod=c;break;}}}
+  if(!cod){toast('Não consegui criar a sala. Verifique a internet.');return;}
+  const ok=await rede('PATCH','salas/'+cod,{aberta:true,criada:SV});if(ok===null||ok.aberta!==true){toast('Não abriu a sala: '+(ultimoErro||'resposta inesperada do banco'));return;}
+  codigo=cod;LS.set('portal360_sala_prof',cod);inicio=Date.now();await medirRelogio();telaSala();ouvir();
+  clearInterval(timer);timer=setInterval(()=>{const s=Math.floor((Date.now()-inicio)/1000);const t=$('tempo');if(t)t.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');desenhar();},1000);}
+function ouvir(){parar();const busca=()=>{clearTimeout(refetch);refetch=setTimeout(async()=>{const d=await rede('GET','salas/'+codigo);if(d){sala=d;preencherSelects();desenhar();}},150);};
+  try{es=new EventSource(DB+'/salas/'+codigo+'.json');es.addEventListener('put',busca);es.addEventListener('patch',busca);es.onopen=()=>conexao(true);es.onerror=()=>{conexao(false);if(es&&es.readyState===2){es=null;if(!poll)poll=setInterval(busca,2500);}};}
+  catch(_){poll=setInterval(busca,2500);}busca();}
+function parar(){if(es){es.close();es=null;}if(poll){clearInterval(poll);poll=0;}}
+function conexao(on){const c=$('conexao');c.hidden=false;c.querySelector('.ponto').className='ponto'+(on?'':' alerta');c.lastElementChild.textContent=on?'Conectado':'Reconectando…';}
+async function comando(c){c.id=Date.now().toString(36)+Math.random().toString(36).slice(2,6);c.t=SV;c.alvo=c.alvo||'todos';const r=await rede('PUT','salas/'+codigo+'/comando',c);if(r===null)toast('Comando não enviado: sem conexão.');return r;}
+
+/* ---------- cards ---------- */
+const online=o=>o&&!o.saindo&&typeof o.visto==='number'&&agora()-o.visto<20000;
+function desenhar(){const g=$('grade');if(!g)return;const lista=Object.entries(sala.oculos||{}).sort((a,b)=>String(a[1].rotulo).localeCompare(String(b[1].rotulo),'pt',{numeric:true}));
+  const on=lista.filter(([,o])=>online(o)),vr=on.filter(([,o])=>o.emVR&&o.atividade!=='tirou');$('nOn').textContent=on.length;$('nVR').textContent=vr.length;
+  maos(lista);pesquisaPainel(on);
+  APPS_BOTOES.forEach(([k])=>{const e=$('qt-'+k);if(!e)return;const n=on.filter(([,o])=>o.app===k).length;e.textContent=n||'';e.hidden=!n;});
+  const bem=a=>!a||a==='ativo'||a==='assistindo';const al=on.filter(([,o])=>!bem(o.atividade)).length,na=$('nAlerta');if(na){na.textContent=al;$('tAlerta').classList.toggle('ativo',al>0);}
+  if(!lista.length){ultimaGrade='';g.innerHTML='<div class="vazio">Nenhum óculos na sala ainda. No óculos, abra o catálogo do Portal 360º, toque em <b>🎓 Entrar na sala</b> e digite <b>'+codigo+'</b>.</div>';return;}
+  const cont={};on.forEach(([,o])=>{const r=String(o.rotulo||'');cont[r]=(cont[r]||0)+1;});
+  const html=lista.map(([id,o])=>{const ok=online(o),rep=ok&&cont[String(o.rotulo||'')]>1,pct=o.total?Math.round(100*(o.feitas||0)/o.total):0,b=o.bateria,d=o.desafio||{};
+    const resp=respostaPesq(id);
+    return '<article class="card'+(ok?'':' off')+(ok&&o.emVR?' vr':'')+(rep?' rep':'')+(ok&&o.mao?' mao':'')+(ok&&o.atividade&&o.atividade!=='ativo'&&o.atividade!=='assistindo'?' atn':'')+'"><h3><span class="ponto'+(ok?'':' off')+'"></span>'+esc(o.rotulo||'Óculos')+'</h3>'+
+     status(o,ok)+'<div class="app">'+esc(o.appNome||'')+(o.secao&&o.secao!==o.appNome?' · '+esc(o.secao):'')+'</div><div class="missao">'+esc(ok?(o.viewNome||'—'):'Desconectado'+(o.visto?' há '+tempo(agora()-o.visto):''))+'</div>'+
+     '<div class="meta">'+(rep?'<span class="tag rep" title="Dois óculos usam o mesmo número. Use 🔔 Chamar para achar este e peça para sair e entrar com outro número.">NÚMERO REPETIDO</span>':'')+(ok&&o.atividade==='tirou'?'':ok&&o.emVR?'<span class="tag vr">NO VR</span>':ok?'<span class="tag">FORA DO VR</span>':'')+(ok&&o.diagVR?'<span class="tag" title="Como este óculos entrou no VR depois que você trocou o app (diagnóstico de teste)">'+({auto:'VR: ENTROU SOZINHO','toque-sem-concessao':'VR: QUEST PEDIU TOQUE','toque-vinha-2d':'VR: VEIO DO CATÁLOGO'}[o.diagVR]||'')+'</span>':'')+(b?'<span class="tag bat'+(b.nivel<=20&&!b.carregando?' baixa':'')+'">🔋 '+b.nivel+'%'+(b.carregando?' ⚡':'')+'</span>':'')+(d.respondidas?'<span class="tag">DESAFIO '+d.acertos+'/'+d.respondidas+'</span>':'')+(resp?'<span class="tag p-'+resp+'">'+({verde:'ENTENDEU',amarelo:'MAIS OU MENOS',vermelho:'NÃO ENTENDEU'}[resp]||'')+'</span>':'')+'</div>'+
+     (ok&&o.mao?'<div class="mao-card"><span class="mao-ani">✋</span>Mão levantada<button data-action="atender" data-id="'+esc(id)+'">Atender</button></div>':'')+
+     engaj(o,ok)+(o.total?'<div class="prog"><i style="width:'+pct+'%"></i></div><div class="num"><span>Missões do sistema</span><span>'+(o.feitas||0)+' / '+o.total+'</span></div>':'')+
+     '<div class="acoes"><button class="btn" data-action="ir-um" data-id="'+esc(id)+'">➜ Levar</button><button class="btn" data-action="chamar" data-id="'+esc(id)+'">🔔 Chamar</button><button class="btn" data-action="remover" data-id="'+esc(id)+'" title="Tirar da lista">✕</button></div></article>';}).join('');
+  if(html!==ultimaGrade){ultimaGrade=html;g.innerHTML=html;}}
+let ultimaGrade='';
+/* ---------- Portal Maestro VR: mãos levantadas ---------- */
+let maosVistas={},carregou=false;
+function maos(lista){const ativas=lista.filter(([,o])=>online(o)&&o.mao).sort((a,b)=>a[1].mao-b[1].mao);let nova=false;
+  ativas.forEach(([id,o])=>{if(maosVistas[id]!==o.mao){maosVistas[id]=o.mao;nova=true;}});Object.keys(maosVistas).forEach(id=>{if(!ativas.some(([i])=>i===id))delete maosVistas[id];});
+  if(nova&&carregou){tremer();somMao();}carregou=true;
+  $('nMaos').textContent=ativas.length;document.querySelector('.t-mao').classList.toggle('ativo',ativas.length>0);
+  const av=$('avisoMaos');if(!ativas.length){av.hidden=true;av.innerHTML='';return;}av.hidden=false;
+  const h='<span class="mao-ani">✋</span><span>'+(ativas.length===1?'Um aluno levantou a mão':ativas.length+' alunos levantaram a mão')+'</span><span class="quem">'+ativas.map(([id,o])=>'<button data-action="atender" data-id="'+esc(id)+'" title="Marcar como atendido">'+esc(o.rotulo||'Óculos')+' · atender</button>').join('')+'</span>';
+  if(av.innerHTML!==h)av.innerHTML=h;}
+function tremer(){const a=$('app');a.classList.remove('tremer');void a.offsetWidth;a.classList.add('tremer');}
+function somMao(){try{const ctx=new AudioContext();[0,.16].forEach((t,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=i?990:740;g.gain.setValueAtTime(.0001,ctx.currentTime+t);g.gain.exponentialRampToValueAtTime(.25,ctx.currentTime+t+.02);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+t+.22);o.connect(g).connect(ctx.destination);o.start(ctx.currentTime+t);o.stop(ctx.currentTime+t+.25);});}catch(_){}}
+/* ---------- Portal Maestro VR: pesquisa rápida ---------- */
+function pesqAtual(){return sala.pesquisa&&sala.pesquisa.ativa?sala.pesquisa:null;}
+function respostaPesq(id){const p=pesqAtual();const r=p&&sala.respostas&&sala.respostas.pesquisa&&sala.respostas.pesquisa[p.pid];return r&&r[id]?r[id].valor:null;}
+function pesquisaPainel(on){const p=pesqAtual(),c=$('cardPesq');let total=0;
+  const todas=(sala.respostas&&sala.respostas.pesquisa)||{};Object.values(todas).forEach(x=>{total+=Object.keys(x||{}).length;});$('nResp').textContent=total;
+  if(!p){c.hidden=true;return;}c.hidden=false;$('pqTexto').textContent=p.pergunta;
+  const r=(todas[p.pid])||{};const n={verde:0,amarelo:0,vermelho:0};Object.values(r).forEach(x=>{if(n[x.valor]!==undefined)n[x.valor]++;});
+  const resp=n.verde+n.amarelo+n.vermelho,sem=Math.max(0,on.filter(([id])=>!r[id]).length),tot=Math.max(1,resp+sem);
+  $('pqTerm').innerHTML=['verde','amarelo','vermelho'].map(k=>'<i class="t-'+k+'" style="width:'+(n[k]/tot*100)+'%"></i>').join('');
+  $('pqLeg').innerHTML='<span><span class="bol t-verde"></span><b>'+n.verde+'</b>entendeu</span><span><span class="bol t-amarelo"></span><b>'+n.amarelo+'</b>mais ou menos</span><span><span class="bol t-vermelho"></span><b>'+n.vermelho+'</b>não entendeu</span><span><b>'+sem+'</b>sem resposta</span>';}
+/* engajamento: status do aluno, tempo na missão, interações e % olhando o conteúdo */
+const ST={ativo:['ok','● Ativo'],parado:['parado','⏸ Parado'],menu:['menu','☰ No menu do Quest'],tirou:['tirou','◌ Tirou o óculos'],assistindo:['ok','▶ Assistindo']};
+function status(o,ok){const a=o.atividade;if(!a)return '';if(!ok&&a!=='tirou')return '';let [cls,txt]=ST[a]||ST.ativo;if(a==='assistindo'&&o.midia&&o.midia.tipo==='audio')txt='🔊 Ouvindo a narração';else if(a==='assistindo')txt='▶ Assistindo o vídeo';
+  const desde=typeof o.statusDesde==='number'&&a!=='ativo'&&a!=='assistindo'?' há '+tempo(agora()-o.statusDesde+(a==='parado'?90000:0)):''; /* parado: conta desde o último movimento */
+  const dica={parado:'Sem mexer a cabeça nem interagir há mais de 90 segundos.',menu:'O aluno abriu o menu do sistema do Quest por cima da atividade.',tirou:'A tela do VR ficou oculta: o óculos saiu do rosto ou o aluno saiu do app.',assistindo:'Vídeo ou narração tocando: conta como participação, mesmo sem cliques.',ativo:'Mexendo a cabeça ou interagindo.'}[a]||'';
+  return '<div class="st '+cls+'" title="'+esc(dica)+'">'+txt+desde+'</div>';}
+function engaj(o,ok){if(!ok||!o.atividade)return '';const p=[];
+  if(typeof o.missaoDesde==='number')p.push('<span>⏱ '+tempo(agora()-o.missaoDesde)+' nesta missão</span>');
+  if(typeof o.interacoes==='number')p.push('<span>👆 '+o.interacoes+(o.interacoes===1?' interação':' interações')+'</span>');
+  let h=p.length?'<div class="eng">'+p.join('')+'</div>':'';
+  const m=o.midia;if(m&&m.dur){const rot=m.tipo==='video'?'Vídeo':'Narração',ic=m.fim?'✓':m.tocando?(m.tipo==='video'?'▶':'🔊'):'⏸';
+    const txt=m.fim?rot+' assistid'+(m.tipo==='video'?'o':'a')+' até o fim':rot+(m.tocando?' em ':' pausad'+(m.tipo==='video'?'o':'a')+' em ')+mmss(m.pos)+' de '+mmss(m.dur);
+    h+='<div class="aten midia" title="'+esc(m.nome||'')+'"><span>'+ic+' '+txt+'</span><div class="barra-at azul"><i style="width:'+(m.visto||0)+'%"></i></div><b>'+(m.visto||0)+'%</b></div>';}
+  if(o.emVR&&typeof o.atencao==='number'){const n=o.atencao,c=n>=60?'':n>=30?' med':' bx';
+    h+='<div class="aten" title="Parte do último minuto com a cabeça voltada para o conteúdo (direção da cabeça, não dos olhos)."><span>Olhando o conteúdo</span><div class="barra-at'+c+'"><i style="width:'+n+'%"></i></div><b>'+n+'%</b></div>';}
+  return h;}
+function mmss(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+function tempo(ms){const s=Math.round(ms/1000);return s<60?s+' s':Math.round(s/60)+' min';}
+
+/* ---------- seletores "levar para" a partir do que os óculos informaram ---------- */
+function preencherSelects(){const sa=$('selApp');if(!sa)return;const mp=mapas();const apps=Object.keys(APPS);
+  const v0=sa.value;sa.innerHTML=apps.map(a=>'<option value="'+a+'">'+esc(APPS[a])+'</option>').join('');if(v0)sa.value=v0;else{const quem=Object.values(sala.oculos||{}).find(online);if(quem&&APPS[quem.app])sa.value=quem.app;}
+  secoes();}
+function secoes(){const sa=$('selApp'),ss=$('selSec');const m=mapas()[sa.value];const v0=ss.value;
+  ss.innerHTML=m?m.secoes.map(s=>'<option value="'+esc(s.id)+'">'+esc(s.nome)+'</option>').join(''):'<option value="">Início do app</option>';if(v0&&[...ss.options].some(o=>o.value===v0))ss.value=v0;ss.disabled=!m;missoes();}
+function missoes(){const sa=$('selApp'),ss=$('selSec'),sm=$('selMis');const m=mapas()[sa.value];const s=m&&m.secoes.find(x=>x.id===ss.value);const v0=sm.value;
+  sm.innerHTML=s?s.missoes.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.nome)+'</option>').join(''):'<option value="">—</option>';if(v0&&[...sm.options].some(o=>o.value===v0))sm.value=v0;sm.disabled=!s;}
+function destino(){return{app:$('selApp').value,sec:$('selSec').value||'',view:$('selMis').value||''};}
+function nomeDestino(d){const m=mapas()[d.app];const s=m&&m.secoes.find(x=>x.id===d.sec);const mi=s&&s.missoes.find(x=>x.id===d.view);return APPS[d.app]+(s?' · '+s.nome:'')+(mi?' · '+mi.nome:'');}
+
+/* ---------- eventos (Regra 9: delegação) ---------- */
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&$('modalPesq')&&!$('modalPesq').hidden){const b=document.querySelector('[data-action="pesquisa-enviar"]');if(b)b.click();}if(e.key==='Escape'&&$('modalPesq'))$('modalPesq').hidden=true;});
+document.addEventListener('change',e=>{if(e.target.id==='selApp')secoes();else if(e.target.id==='selSec')missoes();});
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-action]');if(!b)return;const ac=b.dataset.action,id=b.dataset.id;
+  if(ac==='tela-cheia'){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}catch(_){}return;}
+  if(ac==='abrir'){b.disabled=true;await abrir(null);b.disabled=false;return;}
+  if(ac==='reabrir'){await abrir(LS.get('portal360_sala_prof'));return;}
+  if(!codigo)return;
+  if(ac==='abrir-app'){const ap=b.dataset.app,nome=ap==='catalogo'?'o catálogo':APPS[ap];if(!confirm('Abrir '+nome+' em todos os óculos?'+(ap==='catalogo'?'':' Cada aluno toca em "Entrar em VR" quando o app abrir.')))return;
+    if(await comando({tipo:'ir',app:ap,sec:'',view:''})!==null){toast('Abrindo '+nome+' em todos os óculos.');if(APPS[ap]){$('selApp').value=ap;secoes();}}return;}
+  if(ac==='video'){const a=AULAS_VIDEO[+$('selVideo').value||0];if(a&&await comando({tipo:'video',src:a.src||'',yt:a.yt||'',titulo:a.titulo})!==null)toast((a.yt?'Aula do YouTube em todos os óculos (saem do VR durante o vídeo): ':'Vídeo-aula no telão de todos: ')+a.titulo);return;}
+  if(ac==='video-pausa'){if(await comando({tipo:'video-pausa'})!==null)toast('Vídeo pausado em todos os óculos.');return;}
+  if(ac==='video-play'){if(await comando({tipo:'video-play'})!==null)toast('Vídeo continuando.');return;}
+  if(ac==='video-fim'){if(await comando({tipo:'video-fim'})!==null)toast('Vídeo fechado.');return;}
+  if(ac==='ir-todos'){const d=destino();if(await comando(Object.assign({tipo:'ir'},d))!==null)toast('Turma a caminho: '+nomeDestino(d));}
+  else if(ac==='ir-um'){const d=destino();if(await comando(Object.assign({tipo:'ir',alvo:id},d))!==null)toast((sala.oculos[id]||{}).rotulo+' → '+nomeDestino(d));}
+  else if(ac==='pausa'){if(await comando({tipo:'pausa'})!==null)toast('Óculos pausados com mensagem motivacional.');}
+  else if(ac==='atender'){await rede('DELETE','salas/'+codigo+'/oculos/'+id+'/mao');toast('Mão de '+((sala.oculos||{})[id]||{}).rotulo+' atendida.');}
+  else if(ac==='pesquisa-abrir'){$('modalPesq').hidden=false;const i=$('pqPergunta');i.focus();i.select();}
+  else if(ac==='pesquisa-cancelar'){$('modalPesq').hidden=true;}
+  else if(ac==='pesquisa-enviar'){const pergunta=($('pqPergunta').value||'').trim()||'Entenderam?';const pid=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+    await rede('PUT','salas/'+codigo+'/pesquisa',{pid,pergunta,ativa:true});if(await comando({tipo:'pesquisa',pid,pergunta})!==null){$('modalPesq').hidden=true;toast('Pesquisa enviada para os óculos.');}}
+  else if(ac==='pesquisa-fim'){const p=pesqAtual();await rede('PATCH','salas/'+codigo+'/pesquisa',{ativa:false});await comando({tipo:'pesquisa-fim',pid:p?p.pid:''});toast('Pesquisa encerrada.');}
+  else if(ac==='retomar'){if(await comando({tipo:'retomar'})!==null)toast('Atividade retomada.');}
+  else if(ac==='chamar'){await comando({tipo:'chamar',alvo:id});toast('Chamando '+(sala.oculos[id]||{}).rotulo+'.');}
+  else if(ac==='chamar-todos'){await comando({tipo:'chamar'});toast('Cada óculos mostra o próprio número por 5 segundos.');}
+  else if(ac==='remover'){await rede('DELETE','salas/'+codigo+'/oculos/'+id);toast('Óculos removido da lista.');}
+  else if(ac==='encerrar'){if(!confirm('Encerrar a aula? Os óculos saem da sala e mostram "Aula encerrada".'))return;await comando({tipo:'encerrar'});setTimeout(async()=>{await rede('DELETE','salas/'+codigo);parar();clearInterval(timer);codigo=null;sala={};LS.del('portal360_sala_prof');telaAbrir();toast('Aula encerrada.');},2500);}
+});
+if(!DB)telaConfig();else telaAbrir();
+})();
+</script>
+</body>
+</html>

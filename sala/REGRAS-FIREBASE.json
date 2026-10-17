@@ -1,0 +1,20 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "relogio": {
+      "professor": { ".read": true, ".write": true }
+    },
+    "salas": {
+      "$codigo": {
+        ".read": true,
+        ".write": true,
+        ".validate": "$codigo.matches(/^[0-9]{4}$/)",
+        "aberta": { ".validate": "newData.isBoolean()" },
+        "oculos": {
+          "$id": { ".validate": "!newData.exists() || newData.child('rotulo').isString()" }
+        }
+      }
+    }
+  }
+}

@@ -2,19 +2,28 @@
 
 Atualização do catálogo do Portal do Educador para receber novas aplicações ao longo do tempo. O hub organiza o acervo, apresenta detalhes e encaminha o aluno à experiência escolhida. Cada aplicação continua independente, com seus próprios recursos e atividades.
 
-Este pacote atualiza a interface e a integração do hub existente. **Ele não contém os modelos 3D, áudios, vídeos, capas nem as pastas completas das aplicações.** Esses arquivos continuam na instalação atual.
+Este pacote completo reúne o hub atualizado e as aplicações, modelos, áudios, capas e vídeos recuperados do repositório original `Newpc-Alan/portal-360-vr`, árvore `02f6633ed56185f0d681ddb3099a600cd7b750c1`.
 
-## Instalação sobre o portal existente
+## Publicação no novo repositório
 
-1. Faça uma cópia da instalação atual ou crie um commit antes de atualizar.
-2. Extraia o conteúdo deste pacote na raiz do projeto existente, onde ficam `index.html`, `apps/` e `assets/`.
-3. Substitua o `index.html` da raiz e copie a pasta `hub/` inteira. Atualize também `diagnostico-vr.html`.
-4. **Mantenha as pastas `apps/` e `assets/` existentes. Não apague nem substitua essas pastas por diretórios vazios.**
-5. Preserve o `CNAME` do domínio já configurado. O arquivo incluído mantém `portal360.portaldoeducador.com.br`.
-6. Publique a atualização pelo fluxo habitual do repositório/GitHub Pages. Este pacote, por si só, não faz publicação nem muda o domínio.
-7. Abra o endereço HTTPS do portal, recarregue a página e teste o catálogo. Para verificar sem repetir a abertura, use `?catalog=1` no endereço do hub.
+O destino desta correção é `newpceducador-hue/portal-360-`, branch `main`, pasta `/ (root)`. Consulte o passo a passo em **INSTALAR.txt**.
 
-A pasta `tests/`, este `README.md` e `INSTALAR.txt` são apoio de manutenção; não precisam ser enviados à hospedagem de produção.
+1. Use “Extrair Tudo” no ZIP e copie o conteúdo extraído para a raiz do repositório clonado com GitHub Desktop.
+2. Preserve as pastas completas: `hub/`, `apps/`, `assets/` e `sala/`. Não retire os arquivos de dentro delas.
+3. Mantenha `.nojekyll` na raiz. Este pacote não inclui `CNAME`, pois o destino usa o endereço padrão do GitHub Pages. Remova um CNAME antigo somente desse novo repositório.
+4. Faça o commit, envie com Push origin e aguarde a publicação concluir no GitHub Pages.
+5. Acesse `https://newpceducador-hue.github.io/portal-360-/?catalog=1` e confira cada aplicação.
+
+O envio anterior colocou arquivos de `hub/` na raiz e omitiu `apps/` e `assets/`, gerando erros 404. Este pacote recompõe essa estrutura. Ele não publica automaticamente o site. As aplicações originais foram preservadas; a execução em headset físico ainda precisa ser validada.
+
+Para conferir a integridade dos caminhos antes de publicar:
+
+```bash
+node tools/validar-hub.cjs --completo
+node --test tests/*.test.cjs
+```
+
+A pasta `tests/` e os arquivos de documentação são apoio de manutenção.
 
 ## Organização dos arquivos
 
@@ -29,8 +38,8 @@ A pasta `tests/`, este `README.md` e `INSTALAR.txt` são apoio de manutenção; 
 | `hub/launcher.js` e `hub/launcher.css` | Carregamento da experiência e entrada em VR. |
 | `hub/bridge.js` | Integração opcional para novas aplicações. |
 | `diagnostico-vr.html` | Verificações do navegador e teste explícito de entrada em VR. |
-| `apps/` | Aplicações existentes; pasta não incluída neste pacote. |
-| `assets/` | Logo, capas, vídeos e outros arquivos existentes; pasta não incluída. |
+| `apps/` | Aplicações originais completas, incluídas neste pacote. |
+| `assets/` | Logo, capas, vídeos e outros arquivos originais incluídos. |
 
 Os caminhos das cinco aplicações cadastradas foram preservados: `apps/sistema-solar/`, `apps/dna/`, `apps/corpo-humano/`, `apps/terra/` e `apps/celula/`. História e Química permanecem identificadas como propostas em desenvolvimento, sem botão de acesso a uma aplicação inexistente.
 

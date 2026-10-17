@@ -1,0 +1,38 @@
+PORTAL MAESTRO VR · Sala do professor do Portal 360º VR (painel 2.0 · cliente 1.7.0, out/2026)
+
+O que é: painel (sala/index.html) em que o professor acompanha cada óculos e conduz a turma.
+- Cada óculos entra na sala pelo botão "🎓 Entrar na sala" (catálogo ou app, fora do VR) ou pelo link
+  ?sala=1234&oculos=3 (bom para o modo quiosque do ManageXR).
+- O painel mostra, por óculos: app, sistema/tema, missão atual, progresso, Desafio, se está no VR e a bateria.
+- Comandos: levar todos (ou um) para uma missão, pausar/retomar ("Olhe para o professor"), identificar
+  cada óculos (mostra o número por 5 s) e encerrar a aula.
+- Nenhum dado pessoal: só o número do óculos e o andamento da atividade.
+
+Peças:
+- assets/sala/sala-cliente.js  (mestre; cópia idêntica em cada apps/<app>/sala-cliente.js)
+- sala/index.html               (painel do professor)
+- sala/REGRAS-FIREBASE.json     (regras do Realtime Database)
+- tools/rtdb-simulado.py        (banco simulado para testar sem internet: python3 tools/rtdb-simulado.py 8795,
+                                 depois abrir o painel e os apps com ?saladb=http://localhost:8795)
+
+Configuração: o endereço do Realtime Database entra em DB_PADRAO, no sala-cliente.js (mestre e cópias) e no
+sala/index.html. Enquanto estiver vazio, o botão da sala não aparece nos óculos e o painel avisa que falta configurar.
+
+Limites conhecidos (v1):
+- Sem login: quem souber o endereço do banco e o código da sala consegue enviar comandos. Os dados não são
+  pessoais; a próxima versão pode exigir login anônimo + chave do professor.
+- Levar para OUTRO app troca de página; no VR o aluno precisa tocar em "Entrar em VR" de novo (regra do navegador).
+
+Novidades (Portal Maestro VR, out/2026):
+- Painel no visual do Portal Maestro (mesma linguagem do Maestro de Chromebook), com Painel da aula: óculos conectados,
+  dentro do VR, mãos levantadas, respostas na pesquisa e quem precisa de atenção.
+- Pausa com mensagem motivacional: as artes de assets/sala/pausa/ (16:9, texto centralizado) aparecem à frente dos olhos,
+  sorteadas e trocadas a cada 40 s. Sem internet, cai para o texto "Olhe para o professor".
+- Mão levantada: o aluno ergue o controle acima da cabeça por 1,5 s (ou segura o botão do analógico por 0,6 s; fora do VR,
+  botão "✋ Levantar a mão"). No painel: aviso no topo, tremidinha, som e card piscando; "Atender" baixa a mão e o óculos
+  mostra "O professor viu sua mão". Grava salas/<código>/oculos/<id>/mao.
+- Pesquisa rápida: o professor pergunta e o aluno responde no VR apontando o controle (Entendi / Mais ou menos / Não entendi).
+  Respostas em salas/<código>/respostas/pesquisa/<pid>/<id>; estado da pesquisa em salas/<código>/pesquisa.
+- As regras do Firebase não mudaram (tudo fica dentro de salas/<código>).
+- Ao mudar o sala-cliente.js: copiar o mestre para apps/<app>/ (a Célula tem APPS/PASTA/ADAPT próprios), subir o ?v= nos
+  index.html e rodar tools/gerar-precache.py de cada app (o modo offline guarda o cliente em cache).
